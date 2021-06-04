@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>FlaskWebMessenger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/main.css') }}">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1>Flask Web Messenger</h1>
+        {% for flash_message in get_flashed_messages() %}
+        <div class="flash">{{ flash_message }}</div>
+        {% endfor %}
+
+        <h2>Recent Messages</h2>
+        <div class="content">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message.body }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <h2>Send a message</h2>
+        <form method="post" action="/add-message" class="main-form" id="message-form">
+            <div class="form-row">
+                <label for="to">
+                    Recipient number:
+                    <input type="tel" placeholder="+15550123456" name="to" />
+                </label>
+                <label for="sender">
+                    Your name:
+                    <input type="text" placeholder="Jane" name="sender" />
+                </label>
+            </div>
+            <div class="form-row">
+                <label for="receiver">
+                    Recipient name:
+                    <input type="text" placeholder="Sally" name="receiver" />
+                </label>
+                <label for="message">
+                    Your message:
+                    <input type="text" placeholder="Hello!" name="message" />
+                </label>
+            </div>
+        </form>
+        <button form="message-form" class="message-button">Send message</button>
+    </div>
+</body>
+
+</html>
